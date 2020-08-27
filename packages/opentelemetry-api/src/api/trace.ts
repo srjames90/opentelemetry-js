@@ -17,6 +17,8 @@
 import { NOOP_TRACER_PROVIDER } from '../trace/NoopTracerProvider';
 import { Tracer } from '../trace/tracer';
 import { TracerProvider } from '../trace/tracer_provider';
+import { SpanContext } from '../trace/span_context';
+import { isSpanContextValid } from '../trace/spancontext-utils';
 import {
   API_BACKWARDS_COMPATIBILITY_VERSION,
   GLOBAL_TRACE_API_KEY,
@@ -81,4 +83,6 @@ export class TraceAPI {
   public disable() {
     delete _global[GLOBAL_TRACE_API_KEY];
   }
+
+  public isSpanContextValid = isSpanContextValid;
 }
