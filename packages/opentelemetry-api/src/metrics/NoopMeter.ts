@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { BatchObserverResult } from './BatchObserverResult';
-import { Meter } from './Meter';
+import { BatchObserverResult } from "./BatchObserverResult";
+import { Meter } from "./Meter";
 import {
   MetricOptions,
   UnboundMetric,
@@ -26,15 +26,15 @@ import {
   BatchObserver,
   UpDownCounter,
   BaseObserver,
-} from './Metric';
+} from "./Metric";
 import {
   BoundValueRecorder,
   BoundCounter,
   BoundBaseObserver,
-} from './BoundInstrument';
-import { CorrelationContext } from '../correlation_context/CorrelationContext';
-import { SpanContext } from '../trace/span_context';
-import { ObserverResult } from './ObserverResult';
+} from "./BoundInstrument";
+import { CorrelationContext } from "../correlation_context/CorrelationContext";
+import { SpanContext } from "../trace/span_context";
+import { ObserverResult } from "./ObserverResult";
 
 /**
  * NoopMeter is a noop implementation of the {@link Meter} interface. It reuses
@@ -132,7 +132,6 @@ export class NoopMetric<T> implements UnboundMetric<T> {
 }
 
 export class NoopCounterMetric extends NoopMetric<BoundCounter>
-
   implements Counter {
   add(value: number, labels: Labels) {
     this.bind(labels).add(value);
@@ -140,7 +139,6 @@ export class NoopCounterMetric extends NoopMetric<BoundCounter>
 }
 
 export class NoopValueRecorderMetric extends NoopMetric<BoundValueRecorder>
-
   implements ValueRecorder {
   record(
     value: number,
@@ -148,9 +146,9 @@ export class NoopValueRecorderMetric extends NoopMetric<BoundValueRecorder>
     correlationContext?: CorrelationContext,
     spanContext?: SpanContext
   ) {
-    if (typeof correlationContext === 'undefined') {
+    if (typeof correlationContext === "undefined") {
       this.bind(labels).record(value);
-    } else if (typeof spanContext === 'undefined') {
+    } else if (typeof spanContext === "undefined") {
       this.bind(labels).record(value, correlationContext);
     } else {
       this.bind(labels).record(value, correlationContext, spanContext);
@@ -159,7 +157,6 @@ export class NoopValueRecorderMetric extends NoopMetric<BoundValueRecorder>
 }
 
 export class NoopBaseObserverMetric extends NoopMetric<BoundBaseObserver>
-
   implements BaseObserver {
   observation() {
     return {
@@ -170,7 +167,6 @@ export class NoopBaseObserverMetric extends NoopMetric<BoundBaseObserver>
 }
 
 export class NoopBatchObserverMetric extends NoopMetric<void>
-
   implements BatchObserver {}
 
 export class NoopBoundCounter implements BoundCounter {
