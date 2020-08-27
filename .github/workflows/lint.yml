@@ -42,6 +42,7 @@ jobs:
 
       - name: Lint
         run: |
+          prettier -v
           npm run lint
           npm run lint:examples
 
